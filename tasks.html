@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style type="text/css">
+    body {
+      background-color: cadetblue;
+      color: white;
+    }
+
+    #main {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center horizontally */
+    }
+
+    .tasks {
+      display: flex;
+      justify-content: space-between;
+      align-items: center; /* Center vertically */
+      width: 90%;
+      height: 70px;
+      background: rgb(190, 179, 179);
+      border: none;
+      border-radius: 1px;
+      margin: 1%;
+    }
+
+    .tasks button {
+      width: 10%;
+      height: 100%;
+    }
+
+    .ticker {
+      border: none;
+      background: transparent;
+    }
+
+    .ticker img {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
+
+    .task-details {
+      flex-grow: 1; /* Take remaining space */
+      margin-left: 10px; /* Add some space between tick button and details */
+    }
+
+    .task-header {
+      font-weight: bold; /* Make task header bold */
+      margin-bottom: 25px; /* Add space below task header */
+    }
+
+
+    .tick-btn {
+      order: 0; /* Set tick button to the left */
+    }
+
+    .cross-btn1 {
+      order: 4; /* Set second cross button to the right */
+    }
+
+    .cross-btn2 {
+      order: 3; /* Set first cross button to the right */
+    }
+
+
+    .cross-btn3 {
+      order: 2; /* Set third cross button to the right */
+    }
+  </style>
+  <style id="styler">.task-header {font-size: 15px;}.task-description {font-size: 7px;}</style>
+</head>
+<body>
+  <div id="main">
+    <div class="tasks">
+      <button class="ticker tick-btn" onclick="plus(this);"><img src="cc/tick.png"></button>
+      <div class="task-details">
+        <div class="task-header">Task Header</div>
+        <div class="task-description">Task details</div>
+      </div>
+      <button class="ticker cross-btn2" onclick="del(this);"><img src="cc/m.png"></button>
+      <button class="ticker cross-btn1" onclick="minus(this);"><img src="cc/cross.png"></button>
+      <button class="ticker cross-btn3" onclick=""><img src="cc/c.png"></button>
+    </div>  
+
+    </div>
+
+  <script type="text/javascript">
+if(!localStorage.health){localStorage.health = 0;}
+if(!localStorage.progress){localStorage.progress = 0;}
+    if (window.location.href.indexOf('?hidem=1') !== -1) {
+      var hideButtons1 = document.querySelectorAll('.tasks .cross-btn2');
+      var hideButtons2 = document.querySelectorAll('.tasks .cross-btn3');
+      hideButtons1.forEach(function(button) {
+        button.style.display = 'none';
+      });
+      hideButtons2.forEach(function(button) {
+        button.style.display = 'none';
+      });
+    }
+    function plus(button) {
+
+      if(localStorage.progress < 99){localStorage.progress ++;localStorage.progress ++;
+      }
+  if(localStorage.health < 100){
+
+    localStorage.health ++;}}
+
+      function minus(button) {
+      
+        if(localStorage.progress > 1){localStorage.progress --;localStorage.progress --;}
+        if(localStorage.health > 2){
+          localStorage.health --;localStorage.health --;localStorage.health --;}
+}
+
+
+    function del(button) {
+      button.parentElement.outerHTML="";
+    }
+function font(){
+  var a = window.innerHeight;
+  var b = window.innerWidth;
+  document.getElementById("styler").innerHTML = ".task-header {font-size:"+(b+a)*0.007+"px;}.task-description {font-size: "+(a+b)*0.006+"px;}"}
+  font();
+ </script>
+</body>
+</html>

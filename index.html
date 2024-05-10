@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+body{
+  background: #3c3c3c;
+color: white;
+}
+#TaskestMobile{
+  background: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5%;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size:100%;
+
+}
+#footermenus {
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 8%;
+background-color: #555555;
+}
+button{ border: none;}
+#performance{
+  width: 33.33%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  background: transparent;
+}
+#create{
+  width: 33.33%;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  background: transparent;
+}
+#tasks{
+  width: 33.33%;
+  height: 100%;
+  position: absolute;
+  left: 33.33%;
+  right: 33.33%;
+  background: transparent;
+  
+}
+#mainframe {
+  width: 100%;
+  overflow: scroll;
+  position: fixed;
+  top:17%;
+  height:75%;
+  z-index: 1;
+  left: 0;
+}
+#health{position: absolute;top: 0;left: 0;height: 100%;background:rgb(255, 0, 119);width: 0%;transition:linear 600ms;}
+#progress{position: absolute;top: 0;left: 0;height: 100%;background:rgb(255, 153, 0);width: 0%;transition:linear 600ms;}
+    </style>
+    <style id="styler"></style>
+  
+  </head>
+  <body>
+<header id="TaskestMobile">
+
+  <center style="width: 100%;height: 100%;">
+    <img id="logo" src="cc/1714224814408.png" style="height: 100%;" >
+  </center>
+
+</header>
+
+
+<div style="position: fixed;width: 79%;height: 12%;background: black;top:5%;;left: 21%;">
+  <div style="position: absolute;left: 10%;top:30%;height: 50%;width: 100%;"><a id="hbar"> Health </a><div style="position: absolute;width: 60%;height: 24%;top: 1%;left: 20%;background: rgb(76, 76, 80);border-radius:9999px;overflow: hidden;"><div id="health"></div></div></div>
+  <div style="position: absolute;left: 10%;bottom: -10%;height: 50%;width: 100%;" ><a id="pbar"> Progress </a> <div style="position: absolute;width: 60%;height: 24%;top: 0%;left: 20%;background: rgb(76, 76, 80);border-radius:9999px;overflow: hidden;"><div id="progress"></div></div></div>
+</div>
+<div style="position: fixed;width: 21%;height: 12%;background: rgb(126, 32, 32);top:5%;;left: 0%;">
+  <center style="width: 100%;height: 100%;">
+    <img id="logo" src="cc/pp.png" style="width: 100%;height:50%;object-fit: contain;">
+    <a style=" position: absolute; bottom: 25%; left: 30%;" id="username"> Samiul Samir </a>
+  </center>
+</div>
+
+  <iframe id="mainframe" src="tasks.html?hidem=1;"></iframe>
+<div id="footermenus">
+  <button id="performance" onclick="performance();"><img src="cc/p.png" style="height: 70%;"></button>
+
+<button id="tasks" style="border:solid #9d081e 8px;" onclick="tasks();"><img src="cc/t.png" style="height: 70%;"></button>
+<button id="create" onclick="create();"><img src="cc/c.png" style="height: 70%;"></button>
+</div>
+<a id="namepicker">
+</a>
+</body>
+<script>
+function create(){
+  if(document.getElementById("mainframe").getAttribute("src") == "customize.html" ) { return false;} else{
+  document.getElementById("mainframe").setAttribute("src","customize.html");
+  document.getElementById("create").style="border:solid #9d081e 8px;";
+  document.getElementById("tasks").style="";
+  document.getElementById("performance").style="";
+
+  }}
+function tasks(){
+  if(document.getElementById("mainframe").getAttribute("src") == "tasks.html?hidem=1;" ) { return false;} else{
+  document.getElementById("mainframe").setAttribute("src","tasks.html?hidem=1;");
+  document.getElementById("create").style="";
+  document.getElementById("tasks").style="border:solid #9d081e 8px;";
+  document.getElementById("performance").style="";
+  }
+}
+function performance(){ if(document.getElementById("mainframe").getAttribute("src") == "performance.html" ) { return false;} else{
+  document.getElementById("mainframe").setAttribute("src","performance.html");
+  document.getElementById("create").style="";
+  document.getElementById("tasks").style="";
+  document.getElementById("performance").style="border:solid #9d081e 8px;";
+
+}
+}
+function Ref() {
+  document.getElementById("health").style.width = localStorage.health+"%";
+  document.getElementById("progress").style.width = localStorage.progress+"%";
+  document.getElementById("hbar").innerHTML = "Health "+localStorage.health+"/100";
+  document.getElementById("pbar").innerHTML = "Progress "+localStorage.progress+"/100";
+}
+setInterval(Ref,100);
+if (!localStorage.username){
+  document.getElementById("namepicker").innerHTML = "<div style='width: 100%;height: 100%;position: fixed;left: 0;top: 0; z-index: 9999999999999;background-color: black;'><div style='width:80%;height: 80%;position: fixed;top:10%;left: 10%;background: white;'></div></div>"
+  
+}
+
+function font(){
+  var a = window.innerHeight;
+  var b = window.innerWidth;
+  document.getElementById("styler").innerHTML = "#username {font-size:"+(b+a)*0.007+"px;} #hbar {font-size:"+(b+a)*0.007+"px;}#pbar {font-size:"+(b+a)*0.0068+"px;}"}
+  font();
+</script>
+</html>
