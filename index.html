@@ -1,141 +1,203 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <style type="text/css">
-body{
-  background: #3c3c3c;
-color: white;
-}
-#TaskestMobile{
-  background: black;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 5%;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  font-size:100%;
-
-}
-#footermenus {
-position: fixed;
-bottom: 0;
-left: 0;
-width: 100%;
-height: 8%;
-background-color: #555555;
-}
-button{ border: none;}
-#performance{
-  width: 33.33%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  background: transparent;
-}
-#create{
-  width: 33.33%;
-  height: 100%;
-  position: absolute;
-  right: 0;
-  background: transparent;
-}
-#tasks{
-  width: 33.33%;
-  height: 100%;
-  position: absolute;
-  left: 33.33%;
-  right: 33.33%;
-  background: transparent;
-  
-}
-#mainframe {
-  width: 100%;
-  overflow: scroll;
-  position: fixed;
-  top:17%;
-  height:75%;
-  z-index: 1;
-  left: 0;
-}
-#health{position: absolute;top: 0;left: 0;height: 100%;background:rgb(255, 0, 119);width: 0%;transition:linear 600ms;}
-#progress{position: absolute;top: 0;left: 0;height: 100%;background:rgb(255, 153, 0);width: 0%;transition:linear 600ms;}
-    </style>
-    <style id="styler"></style>
-  
-  </head>
-  <body>
-<header id="TaskestMobile">
-
-  <center style="width: 100%;height: 100%;">
-    <img id="logo" src="cc/1714224814408.png" style="height: 100%;" >
-  </center>
-
-</header>
-
-
-<div style="position: fixed;width: 79%;height: 12%;background: black;top:5%;;left: 21%;">
-  <div style="position: absolute;left: 10%;top:30%;height: 50%;width: 100%;"><a id="hbar"> Health </a><div style="position: absolute;width: 60%;height: 24%;top: 1%;left: 20%;background: rgb(76, 76, 80);border-radius:9999px;overflow: hidden;"><div id="health"></div></div></div>
-  <div style="position: absolute;left: 10%;bottom: -10%;height: 50%;width: 100%;" ><a id="pbar"> Progress </a> <div style="position: absolute;width: 60%;height: 24%;top: 0%;left: 20%;background: rgb(76, 76, 80);border-radius:9999px;overflow: hidden;"><div id="progress"></div></div></div>
-</div>
-<div style="position: fixed;width: 21%;height: 12%;background: rgb(126, 32, 32);top:5%;;left: 0%;">
-  <center style="width: 100%;height: 100%;">
-    <img id="logo" src="cc/pp.png" style="width: 100%;height:50%;object-fit: contain;">
-    <a style=" position: absolute; bottom: 25%; left: 30%;" id="username"> Samiul Samir </a>
-  </center>
-</div>
-
-  <iframe id="mainframe" src="tasks.html?hidem=1;"></iframe>
-<div id="footermenus">
-  <button id="performance" onclick="performance();"><img src="cc/p.png" style="height: 70%;"></button>
-
-<button id="tasks" style="border:solid #9d081e 8px;" onclick="tasks();"><img src="cc/t.png" style="height: 70%;"></button>
-<button id="create" onclick="create();"><img src="cc/c.png" style="height: 70%;"></button>
-</div>
-<a id="namepicker">
-</a>
-</body>
-<script>
-function create(){
-  if(document.getElementById("mainframe").getAttribute("src") == "customize.html" ) { return false;} else{
-  document.getElementById("mainframe").setAttribute("src","customize.html");
-  document.getElementById("create").style="border:solid #9d081e 8px;";
-  document.getElementById("tasks").style="";
-  document.getElementById("performance").style="";
-
-  }}
-function tasks(){
-  if(document.getElementById("mainframe").getAttribute("src") == "tasks.html?hidem=1;" ) { return false;} else{
-  document.getElementById("mainframe").setAttribute("src","tasks.html?hidem=1;");
-  document.getElementById("create").style="";
-  document.getElementById("tasks").style="border:solid #9d081e 8px;";
-  document.getElementById("performance").style="";
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do List with Highlight</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
   }
-}
-function performance(){ if(document.getElementById("mainframe").getAttribute("src") == "performance.html" ) { return false;} else{
-  document.getElementById("mainframe").setAttribute("src","performance.html");
-  document.getElementById("create").style="";
-  document.getElementById("tasks").style="";
-  document.getElementById("performance").style="border:solid #9d081e 8px;";
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  .container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .todo-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  .todo-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    display: flex;
+    align-items: center;
+  }
+  .todo-item label {
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  .todo-item.checked {
+    background-color: #e1f7d5;
+    border-color: #9fdfa1;
+  }
+  .highlight {
+    background-color: #ffefb5;
+    border: 1px solid #ffd700;
+  }
+  #header {
+    background-color: #fff;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 4px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  }
+  #current-task {
+    margin: 0;
+    font-size: 18px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>To-Do List</h1>
 
-}
-}
-function Ref() {
-  document.getElementById("health").style.width = localStorage.health+"%";
-  document.getElementById("progress").style.width = localStorage.progress+"%";
-  document.getElementById("hbar").innerHTML = "Health "+localStorage.health+"/100";
-  document.getElementById("pbar").innerHTML = "Progress "+localStorage.progress+"/100";
-}
-setInterval(Ref,100);
-if (!localStorage.username){
-  document.getElementById("namepicker").innerHTML = "<div style='width: 100%;height: 100%;position: fixed;left: 0;top: 0; z-index: 9999999999999;background-color: black;'><div style='width:80%;height: 80%;position: fixed;top:10%;left: 10%;background: white;'></div></div>"
-  
-}
+  <!-- Header to dynamically highlight current task -->
+  <div id="header">
+    <h2>What to do now:</h2>
+    <p id="current-task"></p>
+  </div>
 
-function font(){
-  var a = window.innerHeight;
-  var b = window.innerWidth;
-  document.getElementById("styler").innerHTML = "#username {font-size:"+(b+a)*0.007+"px;} #hbar {font-size:"+(b+a)*0.007+"px;}#pbar {font-size:"+(b+a)*0.0068+"px;}"}
-  font();
+  <!-- To-Do List -->
+  <ul class="todo-list" id="todo-list">
+    <li class="todo-item">
+      <input type="checkbox" id="task-sleep">
+      <label for="task-sleep">Sleep (3 AM - 10 AM)</label>
+    </li>
+    <li class="todo-item">
+      <input type="checkbox" id="task-wake">
+      <label for="task-wake">Wake up, shower, and have breakfast (10 AM - 11 AM)</label>
+    </li>
+    <li class="todo-item">
+      <input type="checkbox" id="task-maths">
+      <label for="task-maths">Practice maths at home (11 AM - 1 PM)</label>
+    </li>
+    <li class="todo-item">
+      <input type="checkbox" id="task-online-class">
+      <label for="task-online-class">Attend online class (1 PM - 3 PM)</label>
+    </li>
+    <li class="todo-item">
+      <input type="checkbox" id="task-tuition">
+      <label for="task-tuition">Private tuition outdoors (5 PM - 8 PM)</label>
+    </li>
+    <li class="todo-item">
+      <input type="checkbox" id="task-dinner">
+      <label for="task-dinner">Dinner and short break (8 PM - 9 PM)</label>
+    </li>
+    <li class="todo-item">
+      <input type="checkbox" id="task-second-online-class">
+      <label for="task-second-online-class">Attend second online class (9 PM - 11 PM)</label>
+    </li>
+    <li class="todo-item">
+      <input type="checkbox" id="task-movie">
+      <label for="task-movie">Watch a 3-hour movie (11 PM - 2 AM)</label>
+    </li>
+    <li class="todo-item">
+      <input type="checkbox" id="task-sleep-again">
+      <label for="task-sleep-again">Wind down and prepare for sleep (2 AM)</label>
+    </li>
+  </ul>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Function to check current time and highlight the appropriate task
+  function highlightCurrentTask() {
+    const now = new Date();
+    const currentHour = now.getHours();
+
+    // Remove highlight from all tasks
+    const tasks = document.querySelectorAll('.todo-item');
+    tasks.forEach(task => {
+      task.classList.remove('highlight');
+    });
+
+    // Highlight current task based on current time
+    if (currentHour >= 3 && currentHour < 10) {
+      document.getElementById('task-sleep').classList.add('highlight');
+      document.getElementById('current-task').textContent = "Sleep (3 AM - 10 AM)";
+    } else if (currentHour >= 10 && currentHour < 11) {
+      document.getElementById('task-wake').classList.add('highlight');
+      document.getElementById('current-task').textContent = "Wake up, shower, and have breakfast (10 AM - 11 AM)";
+    } else if (currentHour >= 11 && currentHour < 13) {
+      document.getElementById('task-maths').classList.add('highlight');
+      document.getElementById('current-task').textContent = "Practice maths at home (11 AM - 1 PM)";
+    } else if (currentHour >= 13 && currentHour < 15) {
+      document.getElementById('task-online-class').classList.add('highlight');
+      document.getElementById('current-task').textContent = "Attend online class (1 PM - 3 PM)";
+    } else if (currentHour >= 17 && currentHour < 20) {
+      document.getElementById('task-tuition').classList.add('highlight');
+      document.getElementById('current-task').textContent = "Private tuition outdoors (5 PM - 8 PM)";
+    } else if (currentHour >= 20 && currentHour < 21) {
+      document.getElementById('task-dinner').classList.add('highlight');
+      document.getElementById('current-task').textContent = "Dinner and short break (8 PM - 9 PM)";
+    } else if (currentHour >= 21 && currentHour < 23) {
+      document.getElementById('task-second-online-class').classList.add('highlight');
+      document.getElementById('current-task').textContent = "Attend second online class (9 PM - 11 PM)";
+    } else if (currentHour >= 23 || currentHour < 2) {
+      document.getElementById('task-movie').classList.add('highlight');
+      document.getElementById('current-task').textContent = "Watch a 3-hour movie (11 PM - 2 AM)";
+    } else if (currentHour >= 2 && currentHour < 3) {
+      document.getElementById('task-sleep-again').classList.add('highlight');
+      document.getElementById('current-task').textContent = "Wind down and prepare for sleep (2 AM)";
+    } else {
+      document.getElementById('current-task').textContent = "No specific task highlighted at the moment.";
+    }
+  }
+
+  // Function to save checked state to localStorage
+  function saveCheckedState() {
+    const tasks = document.querySelectorAll('.todo-item input[type="checkbox"]');
+    tasks.forEach(task => {
+      localStorage.setItem(task.id, task.checked);
+    });
+  }
+
+  // Function to load checked state from localStorage
+  function loadCheckedState() {
+    const tasks = document.querySelectorAll('.todo-item input[type="checkbox"]');
+    tasks.forEach(task => {
+      const isChecked = localStorage.getItem(task.id) === 'true';
+      task.checked = isChecked;
+      if (isChecked) {
+        task.parentElement.classList.add('checked');
+      }
+    });
+  }
+
+  // Add event listeners for checkboxes
+  const checkboxes = document.querySelectorAll('.todo-item input[type="checkbox"]');
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+      saveCheckedState();
+      if (this.checked) {
+        this.parentElement.classList.add('checked');
+      } else {
+        this.parentElement.classList.remove('checked');
+      }
+    });
+  });
+
+  // Initialize the page
+  loadCheckedState();
+  highlightCurrentTask();
+
+  // Update current task highlight every minute
+  setInterval(highlightCurrentTask, 60000); // Update every minute
+});
 </script>
+</body>
 </html>
